@@ -1,25 +1,69 @@
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MLAB_URL || 'mongod://localhost/MVP');
+const {MLAB_URL} = require('../../config.js');
+
+mongoose.connect(MLAB_URL || 'mongod://localhost/MVP');
 
 let weatherSchema = mongoose.Schema({
-  cityInfo: [{
+  // ALL DATA FROM conditions API request
+  cityInfo: {
     cityName: String,
     cityID: Number,
+    state: String,
     country: String,
+    zip: Number,
+    tz_short: String,
     lat: Number,
     lon: Number,
-  }],
-  forecastData: {
-    day1: {
-      dt:
-      dt_txt:
-      weatherData: {
-        rain:
-        snow:
-        temp_min:
-        temp_max:
-      }
+    elevation: Number,
+  },
+  currentConditions: {
+    queryTime: Date,
+    temp_F: Number,
+    feelsLike_F: Number,
+    wind_mph: Number,
+    wind_gust_mph: Number,
+    icon: String,
+    icon_url: String,
+    forecastRainOneHr: Number,
+    forecastRainToday: Number
+  },
+  forecast: {
+    current: {
+      title: String,
+      description: String,
+      icon: String,
+      icon_url: String,
     },
+    day1: {
+      epoch: Number,
+      date_string: String,
+      high: Number,
+      low: Number,
+      conditions: String,
+      icon: String,
+      icon_url: String,
+      rain_all_day: Number,
+    },
+    day2: {
+      epoch: Number,
+      date_string: String,
+      high: Number,
+      low: Number,
+      conditions: String,
+      icon: String,
+      icon_url: String,
+      rain_all_day: Number,
+    },
+    day3: {
+      epoch: Number,
+      date_string: String,
+      high: Number,
+      low: Number,
+      conditions: String,
+      icon: String,
+      icon_url: String,
+      rain_all_day: Number,
+    }
   }
 });
 
