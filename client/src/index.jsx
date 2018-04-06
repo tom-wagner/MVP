@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 // import AnyComponent from './components/filename.jsx'
 
 class App extends React.Component {
@@ -13,7 +12,9 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>Hello World</div>
+      <div>
+        <div>Do You Need An Umbrella?</div>
+      </div>
     )
   }
 }
