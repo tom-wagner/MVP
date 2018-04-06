@@ -5,8 +5,6 @@ var request = require('request')
 var db = require(path.join(__dirname, '/database/db.js'));
 var helpers = require(path.join(__dirname, '/helpers/API_calls.js'));
 
-
-
 var app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
