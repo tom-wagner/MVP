@@ -14,10 +14,10 @@ let weatherSchema = mongoose.Schema({
     tz_short: String,
     lat: Number,
     lon: Number,
-    elevation: Number,
+    elevation: String,
   },
   currentConditions: {
-    queryTime: Date,
+    timestamp: String,
     temp_F: Number,
     feelsLike_F: Number,
     wind_mph: Number,
@@ -65,12 +65,20 @@ let weatherSchema = mongoose.Schema({
       rain_all_day: Number,
     }
   }
+},
+{ 
+  timestamps: { createdAt: 'created_at'}
 });
 
-let Record = mongoose.model('Document', weatherSchema);
+let WeatherRecord = mongoose.model('WeatherRecord', weatherSchema);
 
-let save = (data) => {
-
+let save = (obj) => {
+  console.log('adding object!!');
+  console.log('object being added:', obj);
+  return WeatherRecord.create(obj)
+                 .catch((err) => {
+                   console.log('console logging err DB-side!!', err);
+                 });
 }
 
 let getRecords = () => {

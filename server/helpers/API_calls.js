@@ -9,7 +9,7 @@
 var axios = require('axios');
 var {apiKey} = require('../../config.js');
 
-function getCurrentConditions(zip, callback) {
+function getCurrentConditions(zip) {
   return axios({
     method: 'GET',
     url: `http://api.wunderground.com/api/${apiKey}/conditions/q/${zip}.json`,
@@ -17,7 +17,7 @@ function getCurrentConditions(zip, callback) {
   })
 }
 
-function getForecast(zip = 'autoip') {
+function getForecast(zip) {
   return axios({
     method: 'GET',
     url: `http://api.wunderground.com/api/${apiKey}/forecast/q/${zip}.json`
