@@ -5,12 +5,16 @@ function RecentQueries({recentQueries}) {
   
   if (recentQueries.length) {
     const listItems = recentQueries.map((query) => {
-      console.log(query);
       return (
-        <li>{query.cityInfo.cityName}</li>
-      )
+        <li>User Location: {query.cityInfo.cityName}
+          <ul>
+            <li>Temperature: {query.currentConditions.temp_F}{'\xB0'}</li>
+            <li>Feels like: {query.currentConditions.feelsLike_F}{'\xB0'}</li>
+            <img src={query.currentConditions.icon_url} alt=""/>
+          </ul>
+        </li>
+      );
     });
-    // console.log('rQ', recentQueries);
 
     return (
       <div className="recentQueries">
