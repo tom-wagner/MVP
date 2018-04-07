@@ -95,7 +95,7 @@ app.post('/Conditions_And_Forecast', function(req, res) {
           // ADD TO DATABASE:
           save(keyDetails).then(() => {
             console.log('post to database successful!!')
-            res.status(200).send(weatherData);
+            res.status(200).send(keyDetails);
           })
           .catch((err) => {
             console.log('err line98 on server', err);

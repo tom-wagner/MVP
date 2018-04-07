@@ -5,6 +5,7 @@ mongoose.connect(MLAB_URL || 'mongod://localhost/MVP');
 
 let weatherSchema = mongoose.Schema({
   // ALL DATA FROM conditions API request
+  time: { type: Date, default: Date.now },
   cityInfo: {
     cityName: String,
     cityID: Number,
@@ -74,8 +75,6 @@ let weatherSchema = mongoose.Schema({
 let WeatherRecord = mongoose.model('WeatherRecord', weatherSchema);
 
 let save = (obj) => {
-  console.log('adding object!!');
-  console.log('object being added:', obj);
   return WeatherRecord.create(obj)
                  .catch((err) => {
                    console.log('console logging err DB-side!!', err);
