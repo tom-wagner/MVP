@@ -31,6 +31,8 @@ app.post('/weather', function(req, res) {
         .then(forecast => {
           weatherData.forecastResp = forecast.data;
 
+          console.log(weatherData.forecastResp.forecast);
+
           // FORMAT OBJECT TO BE SENT TO THE DATABASE:
           var keyDetails = {
             cityInfo: {

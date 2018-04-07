@@ -39,7 +39,7 @@ class WeatherInfo extends React.Component {
           <div style={divStyle} className="rain">
             <h4>Umbrella Analysis:</h4>
             <p>Analysis conducted for: {this.props.weatherData.cityInfo.cityName}, {this.props.weatherData.cityInfo.state}</p>
-            <p className="todayResult">{this.props.weatherData.strings.today} {this.props.weatherData.currentConditions.forecastRainToday.toFixed(2)} inches of rain is expected today.</p>
+            <p className="todayResult"><b>{this.props.weatherData.strings.today} {this.props.weatherData.currentConditions.forecastRainToday.toFixed(2)}" of rain is expected today.</b></p>
           </div>
         )
       } else {
@@ -53,7 +53,7 @@ class WeatherInfo extends React.Component {
           <div style={divStyle} className="noRain">
             <h4>Umbrella Analysis:</h4>
             <p>Analysis conducted for: {this.props.weatherData.cityInfo.cityName}, {this.props.weatherData.cityInfo.state}</p>
-            <p className="todayResult"><b>{this.props.weatherData.strings.today} {this.props.weatherData.currentConditions.forecastRainToday.toFixed(2)} inches of rain is expected today.</b></p>
+            <p className="todayResult"><b>{this.props.weatherData.strings.today} {this.props.weatherData.currentConditions.forecastRainToday.toFixed(2)}" of rain is expected today.</b></p>
           </div>
         )
       }
@@ -63,14 +63,14 @@ class WeatherInfo extends React.Component {
         var tempDiv = (
           <div>
           <div>
-            <p style={{'color': 'red'}}><b>Lucky you!!! The current temp in {this.props.weatherData.cityInfo.cityName} of {this.props.weatherData.currentConditions.temp_F}{'\xB0'} is warmer than the average temp of the last 10 queries, {this.props.average}{'\xB0'}.</b></p>
+            <p style={{'color': 'red'}}><b>Lucky you!!! The current temp in {this.props.weatherData.cityInfo.cityName} of {this.props.weatherData.currentConditions.temp_F}{'\xB0'} is warmer than the average temp of recent queries by other users, {this.props.average}{'\xB0'}.</b></p>
           </div>
           </div>
         );
       } else {
         var tempDiv = (
           <div>
-            <p style={{'color': 'blue'}}><b>Brrrrrrr!!! The current temp in {this.props.weatherData.cityInfo.cityName} of {this.props.weatherData.currentConditions.temp_F}{'\xB0'} is colder than the average temp of the last 10 queries, {this.props.average}{'\xB0'}.</b></p>
+            <p style={{'color': 'blue'}}><b>Brrrrrrr!!! The current temp in {this.props.weatherData.cityInfo.cityName} of {this.props.weatherData.currentConditions.temp_F}{'\xB0'} is colder than the average temp of recent queries by other users, {this.props.average}{'\xB0'}.</b></p>
           </div>
         );
       }
@@ -96,7 +96,9 @@ class WeatherInfo extends React.Component {
       // RENDER
       return (
         <div className="weatherInfo">
-          <h2>Will You Need an Umbrella Today?</h2>
+          <div style={{'margin': '10px', 'padding': '10px'}}>
+            <h2>Will You Need an Umbrella Today?</h2>
+          </div>
           {umbrellaAnalysis}
           {umbrellaDiv}
           <div style={defaultDivStyle} className="today">
