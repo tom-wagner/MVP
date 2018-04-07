@@ -16,9 +16,15 @@ function RecentQueries({recentQueries}) {
       );
     });
 
+    var defaultDivStyle = {
+      'margin': '10px',
+      'padding': '10px',
+      'border': '3px solid black'
+    }
+
     return (
-      <div className="recentQueries">
-        <h2>Weather for other recent "Do You Need An Umbrella?" Users:</h2>
+      <div style={defaultDivStyle} className="recentQueries">
+        <h2>Weather for other recent "Will You Need An Umbrella Today?" Users:</h2>
         <div>
           <ul>
             {listItems}

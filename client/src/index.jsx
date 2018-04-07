@@ -52,7 +52,7 @@ class App extends React.Component {
           cumulativeTemp += results.data[i].currentConditions.temp_F;
         }
         var averageOfLast10 = (cumulativeTemp / 10).toFixed(2) / 1;
-        
+
         this.setState({
           recentQueries: results.data.slice(1),
           averageOfLastTenQueries: averageOfLast10
@@ -71,7 +71,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <WeatherInfo getAndPostWeather={this.getAndPostWeather} weatherData={this.state.weatherData} />
+        <WeatherInfo getAndPostWeather={this.getAndPostWeather}
+                     weatherData={this.state.weatherData}
+                     average={this.state.averageOfLastTenQueries}
+        />
         <RecentQueries recentQueries={this.state.recentQueries} />
       </div>
     )
