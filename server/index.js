@@ -21,14 +21,10 @@ app.post('/Conditions_And_Forecast', function(req, res) {
 
   getCurrentConditions(userLocation)
     .then(conditions => {
-      console.log('conditions!!');
       weatherData.conditionsResp = conditions.data;
       getForecast(userLocation)
         .then(forecast => {
-          console.log('forecast!!');
           weatherData.forecastResp = forecast.data;
-
-          console.log(weatherData);
 
           // FORMAT OBJECT TO BE SENT TO THE DATABASE:
           var keyDetails = {
@@ -93,21 +89,19 @@ app.post('/Conditions_And_Forecast', function(req, res) {
             }
           }
 
-          console.log('getting here!!', keyDetails);
-
           // ADD TO DATABASE:
           save(keyDetails).then(() => {
             console.log('post to database successful!!')
-            res.status(200).send(weatherData);
+            res.status(200).send(keyDetails);
           })
           .catch((err) => {
-            console.log('err line98:', err);
+            console.log('err line98 on server', err);
           });
 
         });
     })
     .catch(err => {
-      console.error('console logging err server-side', err);
+      console.error('console logging err server-side line 104', err);
       res.status(500).send('server issues');
     })
 });
@@ -116,8 +110,16 @@ app.post('/specificLocation', function(req, res) {
 
 });
 
+// React fires off GET request at page load for recent data
+app.get('/recentQueries', function(req, res) {
+  getRecords().then((result) => {
+    res.status(200).send(result);
+  }).catch((err) => {
+    console.log(err);
+    res.status(500).send('Server error!!');
+  })
 
-
+});
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

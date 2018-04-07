@@ -81,8 +81,8 @@ let save = (obj) => {
                  });
 }
 
-let getRecords = () => {
-
+let getRecords = (callback) => {
+  return WeatherRecord.find({}).limit(10).exec(); // .sort(['created_at', -1])
 }
 
 exports.getRecords = getRecords;
