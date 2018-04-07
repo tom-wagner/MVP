@@ -6,7 +6,7 @@ function RecentQueries({recentQueries}) {
   if (recentQueries.length) {
     const listItems = recentQueries.map((query) => {
       return (
-        <li>User Location: {query.cityInfo.cityName}
+        <li key={query._id} >User Location: {query.cityInfo.cityName}
           <ul>
             <li>Temperature: {query.currentConditions.temp_F}{'\xB0'}</li>
             <li>Feels like: {query.currentConditions.feelsLike_F}{'\xB0'}</li>

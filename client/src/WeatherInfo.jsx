@@ -13,12 +13,7 @@ class WeatherInfo extends React.Component {
 
   handleChange(event) {
     this.setState({userInput: event.target.value})
-    console.log(this.state.userInput);
   }
-
-  // btnTapped() {
-  //   console.log('clicked!!');
-  // }
 
   render() {
     if (this.props.weatherData.stillLoading === true) {
@@ -28,7 +23,7 @@ class WeatherInfo extends React.Component {
     } else {
       return (
         <div className="weatherInfo">
-          <h1>Will You Need an Umbrella Today?</h1>
+          <h2>Will You Need an Umbrella Today?</h2>
           <div className="doYouNeedOneToday">
             <h4>Umbrella Analysis:</h4>
             <p>Analysis conducted for: {this.props.weatherData.cityInfo.cityName}, {this.props.weatherData.cityInfo.state}</p>
@@ -55,8 +50,8 @@ class WeatherInfo extends React.Component {
             <h4>Three-day Outlook:</h4>
           </div> */}
           <div className="userInput">
-            <h4>Check the weather for a different location:</h4>
-            <input type="text" /*defaultValue="Enter a ZipCode"*/ value={this.state.userInput} onChange={this.handleChange}/>
+            <h2>Check the weather for a different location:</h2>
+            Zip Code: <input type="text" /*defaultValue="Enter a ZipCode"*/ value={this.state.userInput} onChange={this.handleChange}/>
             <input type="submit" value="Submit" onClick={() => {this.props.getAndPostWeather(this.state.userInput)}} />
           </div>
         </div>

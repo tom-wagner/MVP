@@ -82,7 +82,7 @@ let save = (obj) => {
 }
 
 let getRecords = (callback) => {
-  return WeatherRecord.find({}).sort({date: 'ascending'}).limit(10).exec();
+  return WeatherRecord.find({}).sort({date: 'ascending'}).limit(11).exec();
 }
 
 exports.getRecords = getRecords;

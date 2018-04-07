@@ -12,7 +12,8 @@ class App extends React.Component {
       weatherData: {
         'stillLoading': true
       },
-      recentQueries: []
+      recentQueries: [],
+      averageOfLastTenQueries: null
     }
     this.getAndPostWeather = this.getAndPostWeather.bind(this);
   }
@@ -30,6 +31,7 @@ class App extends React.Component {
           weatherData: result.data
         });
         console.log('weatherData', this.state.weatherData);
+        this.getRecentQueries();
       })
       .catch(err => {
         console.log(err);
@@ -43,10 +45,19 @@ class App extends React.Component {
     }
     return axios(options)
       .then((results) => {
+
+        // DETERMINE AVERAGE OF LAST TEN QUERIES
+        var cumulativeTemp = 0;
+        for (var i = 1; i < results.data.length; i++) {
+          cumulativeTemp += results.data[i].currentConditions.temp_F;
+        }
+        var averageOfLast10 = (cumulativeTemp / 10).toFixed(2) / 1;
+        
         this.setState({
-          recentQueries: results.data
+          recentQueries: results.data.slice(1),
+          averageOfLastTenQueries: averageOfLast10
         })
-        console.log('queries', this.state.recentQueries);
+        console.log('queries', this.state);
       })
       .catch(err => {
         console.log(err);
@@ -55,7 +66,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getAndPostWeather();
-    this.getRecentQueries();
   }
 
   render() {
