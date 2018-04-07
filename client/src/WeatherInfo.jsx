@@ -5,7 +5,7 @@ class WeatherInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
-      userInput: null
+      userInput: ''
     });
     this.handleChange = this.handleChange.bind(this);
     // this.getAndPostWeather = this.props.getAndPostWeather.bind(this);
@@ -32,7 +32,7 @@ class WeatherInfo extends React.Component {
           <div className="doYouNeedOneToday">
             <h4>Umbrella Analysis:</h4>
             <p>Analysis conducted for: {this.props.weatherData.cityInfo.cityName}, {this.props.weatherData.cityInfo.state}</p>
-            <p className="todayResult">{this.props.weatherData.strings.today} {this.props.weatherData.currentConditions.forecastRainToday} inches of rain is expected today.</p>
+            <p className="todayResult">{this.props.weatherData.strings.today} {this.props.weatherData.currentConditions.forecastRainToday.toFixed(2)} inches of rain is expected today.</p>
           </div>
           <div className="howStrong">
             <h4>How Strong Does Your Umbrella Need to Be?</h4>
@@ -56,9 +56,8 @@ class WeatherInfo extends React.Component {
           </div> */}
           <div className="userInput">
             <h4>Check the weather for a different location:</h4>
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" /*defaultValue="Enter a ZipCode"*/ value={this.state.userInput} onChange={this.handleChange}/>
             <input type="submit" value="Submit" onClick={() => {this.props.getAndPostWeather(this.state.userInput)}} />
-            {/* <button value="Submit" onClick={() => {this.props.getAndPostWeather(this.state.userInput)}} /> */}
           </div>
         </div>
       );
