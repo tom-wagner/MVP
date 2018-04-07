@@ -14,10 +14,11 @@ let weatherSchema = mongoose.Schema({
     tz_short: String,
     lat: Number,
     lon: Number,
-    elevation: String,
+    elevation: Number,
   },
   currentConditions: {
-    timestamp: String,
+    timestampString: String,
+    weather: String,
     temp_F: Number,
     feelsLike_F: Number,
     wind_mph: Number,
@@ -82,7 +83,7 @@ let save = (obj) => {
 }
 
 let getRecords = (callback) => {
-  return WeatherRecord.find({}).limit(10).exec(); // .sort(['created_at', -1])
+  return WeatherRecord.find({}).sort({date: 'descending'}).limit(10).exec();
 }
 
 exports.getRecords = getRecords;

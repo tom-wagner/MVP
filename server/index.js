@@ -15,7 +15,9 @@ app.use(bodyParser.json())
 // React fires off GET request at page load for current location
   // req.body.zipCode --> user location
 app.post('/Conditions_And_Forecast', function(req, res) {
-  var userLocation = req.body.zipCode || 10029;
+
+  // ASSUMING ZIP CODE COMES THROUGH AS SUFFIX TO URL
+  let userLocation = Number(req.url.split('=')[1]);
 
   let weatherData = {};
 
@@ -36,18 +38,19 @@ app.post('/Conditions_And_Forecast', function(req, res) {
               tz_short: weatherData.conditionsResp.current_observation.local_tz_short,
               lat: Number(weatherData.conditionsResp.current_observation.observation_location.latitude),
               lon: Number(weatherData.conditionsResp.current_observation.observation_location.longitude),
-              elevation: weatherData.conditionsResp.current_observation.observation_location.elevation,
+              elevation: Number(weatherData.conditionsResp.current_observation.display_location.elevation) * 3.28084,
             },
             currentConditions: {
-              timestamp: weatherData.forecastResp.forecast.txt_forecast.date,
+              timestampString: weatherData.conditionsResp.current_observation.observation_time,
+              weather: weatherData.conditionsResp.current_observation.weather,
               temp_F: Number(weatherData.conditionsResp.current_observation.temp_f),
               feelsLike_F: Number(weatherData.conditionsResp.current_observation.feelslike_f),
               wind_mph: Number(weatherData.conditionsResp.current_observation.wind_mph),
               wind_gust_mph: Number(weatherData.conditionsResp.current_observation.wind_gust_mph),
               icon: weatherData.conditionsResp.current_observation.icon,
               icon_url: weatherData.conditionsResp.current_observation.icon_url,
-              forecastRainOneHr: Number(weatherData.conditionsResp.current_observation.precip_1hr_in),
-              forecastRainToday: Number(weatherData.conditionsResp.current_observation.precip_today_in)
+              forecastRainOneHr: Number(weatherData.conditionsResp.current_observation.precip_1hr_metric) / 25.4,
+              forecastRainToday: Number(weatherData.conditionsResp.current_observation.precip_today_metric) / 25.4
             },
             forecast: {
               current: {
@@ -92,7 +95,7 @@ app.post('/Conditions_And_Forecast', function(req, res) {
           // ADD TO DATABASE:
           save(keyDetails).then(() => {
             console.log('post to database successful!!')
-            res.status(200).send(keyDetails);
+            res.status(200).send(weatherData);
           })
           .catch((err) => {
             console.log('err line98 on server', err);
