@@ -11,13 +11,18 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json())
 
 
-
 // React fires off GET request at page load for current location
   // req.body.zipCode --> user location
-app.post('/Conditions_And_Forecast', function(req, res) {
+app.post('/weather', function(req, res) {
 
-  // ASSUMING ZIP CODE COMES THROUGH AS SUFFIX TO URL
-  let userLocation = Number(req.url.split('=')[1]);
+  console.log('req: ', req);
+
+  // Check for zipCode on POST request
+  // if (req.body.zipCode) {
+  //   let userLocation = req.body.zipCode;
+  // } else {
+  let userLocation = 'autoip'
+  // }
 
   let weatherData = {};
 
@@ -107,10 +112,6 @@ app.post('/Conditions_And_Forecast', function(req, res) {
       console.error('console logging err server-side line 104', err);
       res.status(500).send('server issues');
     })
-});
-
-app.post('/specificLocation', function(req, res) {
-
 });
 
 // React fires off GET request at page load for recent data
