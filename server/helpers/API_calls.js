@@ -7,14 +7,11 @@
 // More resources: https://www.wunderground.com/weather/api/d/docs?d=index
 
 var axios = require('axios');
-// if (!process.env.aiKey) {
-//   var {apiKey} = require('../../config.js');
-}
 
 function getCurrentConditions(zip) {
   return axios({
     method: 'GET',
-    url: `http://api.wunderground.com/api/${process.env.apiKey || apiKey}/conditions/q/${zip}.json`,
+    url: `http://api.wunderground.com/api/${process.env.apiKey}/conditions/q/${zip}.json`,
     responseType: 'blob'
   })
 }
@@ -22,7 +19,7 @@ function getCurrentConditions(zip) {
 function getForecast(zip) {
   return axios({
     method: 'GET',
-    url: `http://api.wunderground.com/api/${process.env.apiKey || apiKey}/forecast/q/${zip}.json`
+    url: `http://api.wunderground.com/api/${process.env.apiKey}/forecast/q/${zip}.json`
   })
 }
 
