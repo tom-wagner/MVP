@@ -44,7 +44,7 @@ class App extends React.Component {
     return axios(options)
       .then((results) => {
         this.setState({
-          recentQueries: results
+          recentQueries: results.data
         })
         console.log('queries', this.state.recentQueries);
       })
