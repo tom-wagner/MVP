@@ -15,14 +15,12 @@ app.use(bodyParser.json())
   // req.body.zipCode --> user location
 app.post('/weather', function(req, res) {
 
-  console.log('req: ', req);
-
   // Check for zipCode on POST request
-  // if (req.body.zipCode) {
-  //   let userLocation = req.body.zipCode;
-  // } else {
-  let userLocation = 'autoip'
-  // }
+  if (req.body.zipCode !== undefined) {
+    var userLocation = req.body.zipCode;
+  } else {
+    var userLocation = 'autoip';
+  }
 
   let weatherData = {};
 
