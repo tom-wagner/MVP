@@ -9,7 +9,9 @@ class App extends React.Component {
   constructor(props) {
   	super(props)
   	this.state = {
-      weatherData: {},
+      weatherData: {
+        'stillLoading': true
+      },
       recentQueries: []
     }
     this.getAndPostWeather = this.getAndPostWeather.bind(this);
@@ -60,7 +62,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Do You Need An Umbrella?</h1>
         <WeatherInfo getAndPostWeather={this.getAndPostWeather} weatherData={this.state.weatherData} />
         <RecentQueries recentQueries={this.state.recentQueries} />
       </div>
