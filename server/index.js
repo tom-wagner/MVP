@@ -102,14 +102,14 @@ app.post('/weather', function(req, res) {
             // set strength requirement based on wind
             if (keyDetails.currentConditions.wind_gust_mph > 30) {
               keyDetails.wind = {
-                'strengthReq': 'You will need an incredibly sturdy umbrella today as wind gusts are expected to exceed 30 MPH!',
+                'strengthReq': 'You will need an incredibly sturdy umbrella today as wind gusts are expected to exceed 30 MPH!!',
                 'umbrellaURL': 'http://www.gustbuster.com/image/122458140.png',
                 'rec': 'GustBuster ',
                 'why': 'With a lifetime warranty and incredible strength, the GustBuster is our pick to literally weather the storm, whether that be a hurricane or a typhoon.'
               }
             } else if (keyDetails.currentConditions.wind_gust_mph > 15) {
               keyDetails.wind = {
-                'strengthReq': 'You will need a fairly strong umbrella today as wind gusts are expected to exceed 15 MPH!',
+                'strengthReq': 'You will need a fairly strong umbrella today as wind gusts are expected to exceed 15 MPH.',
                 'umbrellaURL': 'https://cdn.shopify.com/s/files/1/0227/0033/products/Davek_Solo_Umbrella_Open.jpg?v=1518984397',
                 'rec': 'DAVEK SOLO',
                 'why': 'Power and grace all in an umbrella that fits in your carry-on bag. Truly a great umbrella.'
@@ -123,11 +123,19 @@ app.post('/weather', function(req, res) {
               }
             }
 
+            // set strings for whether an umbrella is required
             keyDetails.umbrellaReq = {
               'today': keyDetails.currentConditions.forecastRainToday > 0 ? true : false,
               'day2': keyDetails.forecast.day1.rain_all_day > 0 ? true : false,
               'day3': keyDetails.forecast.day1.rain_all_day > 0 ? true : false
             }
+
+            keyDetails.strings = {
+              'today': keyDetails.umbrellaReq.today ? 'You will need an umbrella today as' : 'You will not need an umbrella as',
+              'day2': keyDetails.umbrellaReq.day2 ? 'You will need an umbrella tomorrow as' : 'You will not need an umbrella tomorrow!',
+              'day3': keyDetails.umbrellaReq.day3 ? 'Make sure to grab your umbrella!' : 'No umbrella required!'
+            }
+
 
             res.status(200).send(keyDetails);
           })

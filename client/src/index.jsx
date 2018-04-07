@@ -18,13 +18,12 @@ class App extends React.Component {
   }
 
   getAndPostWeather(zipCode) {
+    console.log('firing!!');
     let options = {
       method: 'POST',
       url: '/weather',
     }
-    // console.log('this is zip: ', zipCode);
-    if (typeof zipCode === 'number') { options.data = { zipCode: zipCode }}
-
+    if (typeof zipCode === 'string') { options.data = { zipCode: zipCode }}
     return axios(options)
       .then((result) => {
         this.setState({
