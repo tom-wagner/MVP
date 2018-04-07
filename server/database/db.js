@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-if (process.env.MLAB_URL) {
-  var {MLAB_URL} = require('../../config.js');
-}
+// if (process.env.MLAB_URL) {
+//   var {MLAB_URL} = require('../../config.js');
+// }
 
 mongoose.connect(process.env.MLAB_URL || MLAB_URL);
 

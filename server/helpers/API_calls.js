@@ -7,8 +7,8 @@
 // More resources: https://www.wunderground.com/weather/api/d/docs?d=index
 
 var axios = require('axios');
-if (!process.env.aiKey) {
-  var {apiKey} = require('../../config.js');
+// if (!process.env.aiKey) {
+//   var {apiKey} = require('../../config.js');
 }
 
 function getCurrentConditions(zip) {
