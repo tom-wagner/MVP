@@ -30,7 +30,7 @@ class WeatherInfo extends React.Component {
       // CONDITIONALLY CONFIGURE UMBRELLA ANALYSIS
       if (this.props.weatherData.currentConditions.forecastRainToday > 0) {
         var divStyle = {
-          'background-color': '#f4f142',
+          'backgroundColor': '#f4f142',
           'border': '3px solid red',
           'margin': '10px',
           'padding': '10px'
@@ -44,7 +44,7 @@ class WeatherInfo extends React.Component {
         )
       } else {
         var divStyle = {
-          'background-color': '#3bf22e',
+          'backgroundColor': '#3bf22e',
           'border': '3px solid black',
           'margin': '10px',
           'padding': '10px'

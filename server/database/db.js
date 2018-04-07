@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const {MLAB_URL} = require('../../config.js');
+if (process.env.MLAB_URL) {
+  var {MLAB_URL} = require('../../config.js');
+}
 
-mongoose.connect(MLAB_URL || 'mongod://localhost/MVP');
+mongoose.connect(process.env.MLAB_URL || MLAB_URL);
 
 let weatherSchema = mongoose.Schema({
   // ALL DATA FROM conditions API request

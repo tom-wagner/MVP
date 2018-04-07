@@ -31,8 +31,6 @@ app.post('/weather', function(req, res) {
         .then(forecast => {
           weatherData.forecastResp = forecast.data;
 
-          console.log(weatherData.forecastResp.forecast);
-
           // FORMAT OBJECT TO BE SENT TO THE DATABASE:
           var keyDetails = {
             cityInfo: {
@@ -164,7 +162,7 @@ app.get('/recentQueries', function(req, res) {
 
 });
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');
 });
 
